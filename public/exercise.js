@@ -30,7 +30,7 @@ async function initExercise() {
 }
 
 initExercise();
-
+//if selection changes, display correct form for "cardio" or "resistance" (removing or adding d-none)
 function handleWorkoutTypeChange(event) {
   workoutType = event.target.value;
 
@@ -124,7 +124,7 @@ function handleToastAnimationEnd() {
     location.href = "/";
   }
 }
-
+//clears input values
 function clearInputs() {
   cardioNameInput.value = "";
   nameInput.value = "";
