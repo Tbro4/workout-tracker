@@ -127,6 +127,12 @@ const workoutSeed = [
         reps: 10,
         sets: 4,
       },
+      {
+        type: "cardio",
+        name: "Running",
+        duration: 25,
+        distance: 4,
+      },
     ],
   },
 ];
