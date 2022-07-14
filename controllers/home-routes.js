@@ -18,7 +18,6 @@ router.get("/exercise", async (req, res) => {
 router.get("/stats", async (req, res) => {
   console.log("/stats route hit");
   try {
-    // console.log("AddExercise page is sent");
     res.sendFile(path.join(__dirname + "../../public/stats.html"));
   } catch (err) {
     console.log(err);
