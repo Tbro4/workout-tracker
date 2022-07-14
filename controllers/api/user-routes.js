@@ -51,7 +51,9 @@ router.put("/:id", async (req, res) => {
 router.get("/range", async (req, res) => {
   await db.Workout.find({})
     .then((dbWorkout) => {
-      res.json(dbWorkout);
+      console.log(dbWorkout);
+      lastSeven = dbWorkout.slice(-7);
+      res.json(lastSeven);
     })
     .catch((err) => {
       res.json(err);
