@@ -18,34 +18,53 @@ router.get("/", async (req, res) => {
 
 // localhost:3000/api/workouts (createWorkout)
 router.post("/", async (req, res) => {
-  console.log(req.body);
-  console.log("creating Workout");
-  const day = new Date(new Date().setDate(new Date().getDate()));
-  await db.Workout.collection.insertOne({ day }, (error, response) => {
-    if (error) {
-      res.send(error);
-    } else {
-      res.json(response);
-    }
-  });
+  db.Workout.create(req.body)
+    .then((dbWorkout) => {
+      res.status(200).json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+  //   const day = new Date(new Date().setDate(new Date().getDate()));
+  //   await db.Workout.collection.insertOne({ day });
+
+  //   let data = await db.Workout.find({}).sort({ _id: -1 }).limit(1);
+  //   console.log(`DATA: ${data}`);
+  //   res.json(data);
 });
 
 // localhost:3000/api/workouts (addExercise)
 router.put("/:id", async (req, res) => {
-  console.log("adding exercise");
-  //   console.log(req.body);
-  //   console.log(req.params.id);
-  await db.Workout.updateOne(
-    { _id: req.params.id },
-    { $push: { exercises: req.body } },
-    (error, data) => {
-      if (error) {
-        res.send(error);
-      } else {
-        res.send(data);
-      }
+  db.Workout.findByIdAndUpdate(
+    {
+      _id: req.params.id,
+    },
+    {
+      $push: {
+        exercises: req.body,
+      },
     }
-  );
+  )
+    .then((dbWorkout) => {
+      res.status(200).json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+  //   console.log("adding exercise");
+  //   //   console.log(req.body);
+  //   //   console.log(req.params.id);
+  //   await db.Workout.updateOne(
+  //     { _id: req.params.id },
+  //     { $push: { exercises: req.body } },
+  //     (error, data) => {
+  //       if (error) {
+  //         res.send(error);
+  //       } else {
+  //         res.send(data);
+  //       }
+  //     }
+  //   );
 });
 
 router.get("/range", async (req, res) => {

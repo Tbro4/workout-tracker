@@ -7,7 +7,6 @@ const path = require("path");
 router.get("/exercise", async (req, res) => {
   console.log("/exercise route hit");
   try {
-    // console.log("AddExercise page is sent");
     res.sendFile(path.join(__dirname + "../../public/exercise.html"));
   } catch (err) {
     console.log(err);
